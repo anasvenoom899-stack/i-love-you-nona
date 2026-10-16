@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reasons I Love You, Nona</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* Layout: a black, quiet page like a late-night film still. Slow title, thin-bordered cards that open one at a time, grain over everything. */
+  :root {
+    --bg: #070707;
+    --card: #0f0e0e;
+    --line: rgba(233, 226, 218, .22);
+    --line-strong: rgba(233, 226, 218, .5);
+    --ink: #ece6df;
+    --ink-soft: #9b928a;
+    --accent: #c9a79a;
+    --font-serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+    --font-type: "Courier Prime", "Courier New", monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.5;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 56px 72px;
+    min-height: 100vh;
+  }
+  /* soft vignette */
+  body::before {
+    content: "";
+    position: fixed; inset: 0; pointer-events: none; z-index: 4;
+    background: radial-gradient(90% 70% at 50% 40%, transparent 40%, rgba(0, 0, 0, .55) 100%);
+  }
+  /* film grain, drifting very slowly */
+  body::after {
+    content: "";
+    position: fixed; inset: -50%; pointer-events: none; z-index: 5;
+    opacity: .1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    animation: grain 1.6s steps(6) infinite;
+  }
+  @keyframes grain {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-3%, 2%); }
+    40% { transform: translate(2%, -3%); }
+    60% { transform: translate(-2%, -1%); }
+    80% { transform: translate(3%, 3%); }
+    100% { transform: translate(0, 0); }
+  }
+
+  main { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+
+  header { text-align: center; padding: 24px 0 56px; }
+  .kicker {
+    font-family: var(--font-type); font-size: 13px; letter-spacing: .32em;
+    text-transform: uppercase; color: var(--ink-soft); margin: 0 0 28px;
+  }
+  h1 {
+    font-weight: 300; font-style: italic;
+    font-size: clamp(44px, 12vw, 84px); line-height: 1.08;
+    letter-spacing: .01em; margin: 0; text-wrap: balance;
+  }
+  .rule { width: 1px; height: 54px; background: var(--line-strong); margin: 34px auto 18px; }
+  .hint { font-family: var(--font-type); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); margin: 0; }
+
+  .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 700px) { .grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+
+  .card {
+    position: relative; height: 300px; perspective: 1200px;
+    cursor: pointer; outline-offset: 5px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card:focus-visible { outline: 1px solid var(--accent); }
+  .inner {
+    position: absolute; inset: 0; transform-style: preserve-3d;
+    transition: transform 1.3s cubic-bezier(.25, .6, .2, 1);
+  }
+  .card.flipped .inner { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 26px 24px; text-align: center;
+    background: var(--card); border: 1px solid var(--line);
+  }
+  .front h2 {
+    font-weight: 300; font-style: italic;
+    font-size: clamp(32px, 8.5vw, 38px); line-height: 1.15; margin: 0; text-wrap: balance;
+  }
+  .front .tap {
+    margin-top: 22px; font-family: var(--font-type); font-size: 12px;
+    letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft);
+  }
+
+  .back { transform: rotateY(180deg); border-color: var(--line-strong); gap: 22px; pointer-events: none; }
+  .card.flipped .back { pointer-events: auto; }
+  .back p { margin: 0; font-style: italic; font-weight: 300; font-size: 23px; line-height: 1.4; text-wrap: balance; max-width: 26ch; }
+  .song {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-type); font-size: 14px; letter-spacing: .06em;
+    color: var(--accent); text-decoration: none;
+    border-top: 1px solid var(--line); padding-top: 16px;
+  }
+  .song svg { width: 14px; height: 14px; flex: none; }
+  .song:hover, .song:focus-visible { color: var(--ink); }
+
+  .signoff { margin-top: 72px; font-style: italic; color: var(--ink-soft); text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .inner { transition: none; }
+    body::after { animation: none; }
+  }
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="note" viewBox="0 0 24 24"><path fill="currentColor" d="M9 3v11.3A3.5 3.5 0 1 0 11 17.5V7.4l8-1.6v6.5A3.5 3.5 0 1 0 21 15.5V2z"/></symbol>
+</svg>
+
+<main>
+  <header>
+    <p class="kicker">only for Nona 🖤</p>
+    <h1>reasons I love you, Nona</h1>
+    <div class="rule"></div>
+    <p class="hint">tap a card</p>
+  </header>
+
+  <section class="grid" id="grid" aria-label="Reasons"></section>
+
+  <p class="signoff">I love you, today and always.</p>
+</main>
+
+<script>
+  const reasons = [
+    { title: "our eyes meet", text: "At university, sometimes our eyes meet for just a second, and the whole world goes quiet. My day is made.", song: "Apocalypse", id: "MNVHiCg6IYk" },
+    { title: "I come to see you", text: "I go to university just to see you. That is the real reason I show up.", song: "Sunsetz", id: "pXED8y5IJzk" },
+    { title: "your laugh", text: "I love watching you laugh. It is the best thing I get to see all day.", song: "Sweet", id: "1C4jg6DiwRY" },
+    { title: "I look for you", text: "I love knowing where you are in the faculty, so I can walk over and see you.", song: "Crush", id: "p7lHdbL--Ls" },
+    { title: "I fall harder", text: "I say funny things so you'll like me. But every time you laugh, I'm the one who falls for you more.", song: "Each Time You Fall in Love", id: "o_Ef2UFI_m0" },
+    { title: "our little chats", text: "We haven't sat together yet, not even once. But the time we spend chatting makes me so happy.", song: "K.", id: "L4sbDxR22z4" },
+    { title: "I'm proud of you", text: "I'm proud of you all the time. You are my favorite girl.", song: "Nothing's Gonna Hurt You Baby", id: "fIbQgaZNxZQ" },
+    { title: "our someday", text: "God willing, I'll marry you one day.", song: "Heavenly", id: "TF8UVQuDLuo" }
+  ];
+
+  const grid = document.getElementById("grid");
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+
+  reasons.forEach(r => {
+        const card = document.createElement("div");
+    card.className = "card";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-expanded", "false");
+    card.setAttribute("aria-label", r.title + ". Tap to read.");
+    card.innerHTML =
+      '<div class="inner">' +
+        '<div class="face front"><h2>' + esc(r.title) + '</h2><span class="tap">tap to open</span></div>' +
+        '<div class="face back"><p>' + esc(r.text) + '</p>' +
+        '<a class="song" href="https://www.youtube.com/watch?v=' + r.id + '" target="_blank" rel="noopener"><svg><use href="#note"/></svg>' + esc(r.song) + '</a></div>' +
+      '</div>';
+    const toggle = () => {
+      const on = card.classList.toggle("flipped");
+      card.setAttribute("aria-expanded", String(on));
+    };
+    card.addEventListener("click", e => { if (e.target.closest("a")) return; toggle(); });
+    card.addEventListener("keydown", e => {
+      if (e.target.closest("a")) return;
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+    grid.appendChild(card);
+  });
+</script>
+</body></html>
